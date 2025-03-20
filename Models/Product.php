@@ -17,6 +17,20 @@ class Product{
 
 };
 
+// $prod = new Product(1,'Chai',18,39,'Beverages');
+// $prod->title = "Stefan";
+// echo $prod->title;
+// a = new Product(1,'Chai',18,39,'Beverages');
+// a.title = "Stefan"
+// console,log(a.title)
+
+
+#$allaNamn2 = Array("Stefan","Kalle","Olle")
+// arr = ["Stefan","Kalle","Olle"]
+// arr.forEach(function(name){console.log(name)})
+// for(let name of arr){
+//     console.log(name)    
+
 $allaProdukter = [
 new Product(1,'Chai',18,39,'Beverages'),
 new Product(2,'Chang',19,17,'Beverages'),
@@ -99,7 +113,9 @@ new Product(77,'Original Frankfurter grüne Soße',13,32,'Condiments'),
 
 
 function getAllCategories(){
-    $cats = array_map(function($product){return $product->categoryName;},getAllProducts());
+    global $allaProdukter;
+    $cats = array_map(function($product){return $product->categoryName;},$allaProdukter);
+    // cats är en array med alla produkters kategorier
     $cats = array_unique($cats);
     // foreach(getAllProducts() as $product){
     //     if(!in_array($product->categoryName,$cats)){
@@ -108,7 +124,6 @@ function getAllCategories(){
     // }
     return $cats;
 }
-
 
 function getAllProducts(){
     global $allaProdukter;

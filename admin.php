@@ -1,5 +1,5 @@
 <?php
-include_once("Models/Product.php")
+require_once("Models/Product.php");
 
 
 ?>
@@ -98,3 +98,4 @@ include_once("Models/Product.php")
         <script src="js/scripts.js"></script>
     </body>
 </html>
+
