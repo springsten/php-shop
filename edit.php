@@ -78,26 +78,26 @@ require_once('Models/Product.php');
     ?>
 
     <form method="POST">
-    <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" name="title" value="<?php echo $product->title ?>">
-    </div>
-    <div class="form-group">
-        <label for="price">Price</label>
-        <input type="text" class="form-control" name="price" value="<?php echo $product->price ?>">
-    </div>
-    <div class="form-group">
-        <label for="stockLevel">Stock</label>
-        <input type="text" class="form-control" name="stockLevel" value="<?php echo $product->stockLevel ?>">
-    </div>
-    <div class="form-group">
-        <label for="categpryName">Category name:</label>
-        <input type="text" class="form-control" name="categoryName" value="<?php echo $product->categoryName ?>">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="title" value="<?php echo $product->title ?>">
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" name="price" value="<?php echo $product->price ?>">
+        </div>
+        <div class="form-group">
+            <label for="stockLevel">Stock</label>
+            <input type="text" class="form-control" name="stockLevel" value="<?php echo $product->stockLevel ?>">
+        </div>
+        <div class="form-group">
+            <label for="categpryName">Category name:</label>
+            <input type="text" class="form-control" name="categoryName" value="<?php echo $product->categoryName ?>">
         </div>
         <input type="submit" class="btn btn-primary" value="Uppdatera">
     </form>
-    </div>
-    </section>
+</div>
+</section>
 
 
     <footer class="py-5 bg-dark">
