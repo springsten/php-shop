@@ -147,6 +147,14 @@ function getAllCategories(){
     //         $cats[] = $product->categoryName;
     //     }
     // }
+
+    // $cats = [];
+    // foreach(getAllProducts() as $product){
+    //     if(!in_array($product->categoryName,$cats)){
+    //         array_push($cats, $product->categoryName);
+    //     }
+    // }
+
     return $cats;
 }
 
