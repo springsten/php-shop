@@ -77,7 +77,7 @@ require_once('Models/Product.php');
 
     ?>
 
-    <form method="POST">
+    <form method="POST" > 
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" name="title" value="<?php echo $product->title ?>">
