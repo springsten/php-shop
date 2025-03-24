@@ -31,6 +31,7 @@ class Product{
 // for(let name of arr){
 //     console.log(name)    
 
+// ta bort helt och hållet
 $allaProdukter = [
 new Product(1,'Chai',18,39,'Beverages'),
 new Product(2,'Chang',19,17,'Beverages'),
@@ -112,9 +113,33 @@ new Product(77,'Original Frankfurter grüne Soße',13,32,'Condiments'),
 ];
 
 
+function getProduct($id){    //function getProduct(int $id): Product | null{
+    // SELECT * FROM PRODUCTS WHERE ID = $id
+    global $allaProdukter;
+
+    // return array_find($allaProdukter, function ($product) use ($id ) {
+    //     return $product->id == $id;
+    // });
+
+    foreach($allaProdukter as $product){
+        if($product->id == $id){
+            return $product;
+        }
+    }
+    return null;
+}
+
+// JAG SA: Arrayer = "lika" som  i JavaScript
+// MAP = transformera varje element i en array till något annat
+// FILTER = filtrera bort element i en array - MÅNGA
+// FIND = - sök FÖRSTA elementet i en array som matchar
+
+
+
+
 function getAllCategories(){
     global $allaProdukter;
-    $cats = array_map(function($product){return $product->categoryName;},$allaProdukter);
+    $cats = array_map(function($product):string {return $product->categoryName;},$allaProdukter);
     // cats är en array med alla produkters kategorier
     $cats = array_unique($cats);
     // foreach(getAllProducts() as $product){
@@ -126,6 +151,7 @@ function getAllCategories(){
 }
 
 function getAllProducts(){
+    // DETTA SKA BLI EN SELECT * FROM Products
     global $allaProdukter;
     return $allaProdukter;
 }

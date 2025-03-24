@@ -1,3 +1,7 @@
+<?php
+require_once('Models/Product.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +11,19 @@
 </head>
 <body>
     <?php
-    // plocka det som står i URL edit.php?id=1
+    // plocka det som står i URL edit.php?id=80
     $id = $_GET['id'];
     // Hämta den produkt med detta ID
+    $product = getProduct($id);
+    if($product == null){
+        echo "<h1>Produkten finns inte</h1>";
+    }else{
+        echo "<h1>$product->title</h1>";
+        echo "<p>$product->price</p>";
+        echo "<p>$product->stockLevel</p>";
+        echo "<p>$product->categoryName</p>";
+    }
 
-    echo "<h1>Du klickade på $id</h1>"
     ?>
 </body>
 </html>
