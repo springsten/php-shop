@@ -32,6 +32,13 @@ class Product{
 //     console.log(name)    
 
 // ta bort helt och hållet
+
+// SEEDNING
+// SELECT COUNT(*) FROM Products
+// INSERT INTO PRODUCTS (title, price, stockLevel, categoryName) VALUES ('Chai',18,39,'Beverages')
+
+
+
 $allaProdukter = [
 new Product(1,'Chai',18,39,'Beverages'),
 new Product(2,'Chang',19,17,'Beverages'),
@@ -139,7 +146,13 @@ function getProduct($id){    //function getProduct(int $id): Product | null{
 
 function getAllCategories(){
     // SELECT DISTINCT categoryName FROM Products
-
+   // $data = $pdo->query('SELECT name FROM users')->fetchAll(PDO::FETCH_COLUMN);
+/* array (
+  0 => 'John',
+  1 => 'Mike',
+  2 => 'Mary',
+  3 => 'Kathy',
+)*/
     //global $allaProdukter;
     // $cats = array_map(function($product):string {return $product->categoryName;},$allaProdukter);
     // $cats = array_unique($cats);
@@ -178,7 +191,12 @@ function getAllCategories(){
 }
 
 function getAllProducts(){
-    // DETTA SKA BLI EN SELECT * FROM Products
+    // $dsn = "mysql:host=localhost;dbname=stefansshop";
+    // $pdo = new PDO($dsn, "root", "hejsan123");
+    // $query = $pdo->query('SELECT * FROM Products');
+    // return $query->fetchAll(PDO::FETCH_CLASS, 'Product');
+
+//    DETTA SKA BLI EN SELECT * FROM Products
     global $allaProdukter;
     return $allaProdukter;
 }
