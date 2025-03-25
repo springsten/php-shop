@@ -6,15 +6,6 @@ class Product{
     public $stockLevel;
     public $categoryName;
 
-    function __construct($id,$title,$price,$stockLevel, $categoryName){
-        $this->id = $id;
-        $this->title = $title;
-        $this->price = $price;
-        $this->stockLevel = $stockLevel;
-        $this->categoryName = $categoryName;
-    }
-
-
 };
 
 // $prod = new Product(1,'Chai',18,39,'Beverages');
@@ -146,7 +137,7 @@ function getProduct($id){    //function getProduct(int $id): Product | null{
 
 function getAllCategories(){
     // SELECT DISTINCT categoryName FROM Products
-   // $data = $pdo->query('SELECT name FROM users')->fetchAll(PDO::FETCH_COLUMN);
+// $data = $pdo->query('SELECT age FROM users')->fetchAll(PDO::FETCH_COLUMN);
 /* array (
   0 => 'John',
   1 => 'Mike',
@@ -194,8 +185,10 @@ function getAllProducts(){
     // $dsn = "mysql:host=localhost;dbname=stefansshop";
     // $pdo = new PDO($dsn, "root", "hejsan123");
     // $query = $pdo->query('SELECT * FROM Products');
-    // return $query->fetchAll(PDO::FETCH_CLASS, 'Product');
+    // //                                  DETTA ÄR TABELLEN
 
+    // return $query->fetchAll(PDO::FETCH_CLASS, 'Product');
+    // //                                         DETTA ÄR PHP KLASS 
 //    DETTA SKA BLI EN SELECT * FROM Products
     global $allaProdukter;
     return $allaProdukter;
