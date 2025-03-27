@@ -1,6 +1,7 @@
 <?php 
     class Database{
         public $pdo;
+        // Norte to Stefan STATIC så inte initieras varje gång
 
         function __construct() {    
             $host = "localhost";
@@ -11,6 +12,23 @@
             $dsn = "mysql:host=$host;port=3306;dbname=$db";
             $this->pdo = new PDO($dsn, $user, $pass);
             $this->initDatabase();
+            $this->initData();
+        }
+        function initData(){
+            // if select count(*) from Products = 0
+            // lägg till 50 produkter
+            $sql = "SELECT COUNT(*) FROM Products";
+            $res = $this->pdo->query($sql);
+            $count = $res->fetchColumn();
+            if($count == 0){
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName) VALUES ('Banana', 10, 100, 'Fruit')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName) VALUES ('Apple', 5, 50, 'Fruit')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName) VALUES ('Pear', 7, 70, 'Fruit')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName) VALUES ('Cucumber', 15, 30, 'Vegetable')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName) VALUES ('Tomato', 20, 40, 'Vegetable')");
+                $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName) VALUES ('Carrot', 10, 20, 'Vegetable')");
+
+            }
         }
 
         function initDatabase(){
