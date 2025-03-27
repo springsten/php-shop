@@ -23,8 +23,15 @@
             )');
         }
 
-        function getAllProducts(){
-            $query = $this->pdo->query('SELECT * FROM Products'); // Products är TABELL 
+        function getAllProducts($sortCol="id", $sortOrder="asc"){
+            if(!in_array($sortCol,["id", "title","price","stockLevel"])){
+                $sortCol = "id";
+            }
+            if(!in_array($sortOrder,["asc", "desc"])){
+                $sortOrder = "asc";
+            }
+
+            $query = $this->pdo->query("SELECT * FROM Products ORDER BY $sortCol $sortOrder"); // Products är TABELL 
             return $query->fetchAll(PDO::FETCH_CLASS, 'Product'); // Product är PHP Klass
         }
         function getAllCategories(){

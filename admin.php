@@ -1,7 +1,21 @@
 <?php
 require_once("Models/Product.php");
 require_once("components/Footer.php");
+require_once("Models/Database.php");
 
+$dbContext = new Database();
+
+// admin.php?sortCol=price&sortOrder=asc
+// admin.php?sortCol=price&sortOrder=desc
+// admin.php?sortCol=stockLevel&sortOrder=asc
+
+$sortCol = $_GET['sortCol'] ?? "";
+
+// $sortCol = $_GET['sortCol'];
+// if($sortCol == null){
+//     $sortCol = "";
+// }
+$sortOrder = $_GET['sortOrder'] ?? "";
 
 ?>
 
@@ -49,29 +63,50 @@ require_once("components/Footer.php");
                 </div>
             </div>
         </nav>
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Super shoppen</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Handla massa onödigt hos oss!</p>
-                </div>
-            </div>
-        </header>
         <!-- Section-->
         <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <table class="table">
                 <thead>
-                        <th>Name</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Stock level</th>
+                        <th>Name
+                            <a href="admin.php?sortCol=title&sortOrder=asc">
+                                <i class="bi bi-arrow-down-circle-fill"></i>
+                            </a>
+                            <a href="admin.php?sortCol=title&sortOrder=desc">
+                                <i class="bi bi-arrow-up-circle-fill"></i>
+                            </a>
+            
+
+                        </th>
+                        <th>Category
+                        <a href="admin.php?sortCol=categoryName&sortOrder=asc">
+                                <i class="bi bi-arrow-down-circle-fill"></i>
+                            </a>
+                            <a href="admin.php?sortCol=categoryName&sortOrder=desc">
+                                <i class="bi bi-arrow-up-circle-fill"></i>
+                            </a>  
+                        </th>
+                        <th>Price
+                        <a href="admin.php?sortCol=price&sortOrder=asc">
+                                <i class="bi bi-arrow-down-circle-fill"></i>
+                            </a>
+                            <a href="admin.php?sortCol=price&sortOrder=desc">
+                                <i class="bi bi-arrow-up-circle-fill"></i>
+                            </a>
+                        </th>
+                        <th>Stock level
+                        <a href="admin.php?sortCol=stockLevel&sortOrder=asc">
+                                <i class="bi bi-arrow-down-circle-fill"></i>
+                            </a>
+                            <a href="admin.php?sortCol=stockLevel&sortOrder=desc">
+                                <i class="bi bi-arrow-up-circle-fill"></i>
+                            </a>
+                        </th>
                         <th>action</th>
                 </thead>
 
                 <tbody>
-                <?php foreach(getAllProducts() as $prod){ ?>
+                <?php foreach($dbContext->getAllProducts($sortCol, $sortOrder) as $prod){ ?>
                     <tr>
                         <td><?php echo $prod->title; ?></td>
                         <td><?php echo $prod->categoryName; ?></td>
