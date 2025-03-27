@@ -79,12 +79,8 @@ $sortOrder = $_GET['sortOrder'] ?? "";
 
                         </th>
                         <th>Category
-                        <a href="admin.php?sortCol=categoryName&sortOrder=asc">
-                                <i class="bi bi-arrow-down-circle-fill"></i>
-                            </a>
-                            <a href="admin.php?sortCol=categoryName&sortOrder=desc">
-                                <i class="bi bi-arrow-up-circle-fill"></i>
-                            </a>  
+                        <a href="admin.php?sortCol=categoryName&sortOrder=asc"><i class="bi bi-arrow-down-circle-fill"></i></a>
+                            <a href="admin.php?sortCol=categoryName&sortOrder=desc"><i class="bi bi-arrow-up-circle-fill"></i></a>  
                         </th>
                         <th>Price
                         <a href="admin.php?sortCol=price&sortOrder=asc">

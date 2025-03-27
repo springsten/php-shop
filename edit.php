@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                                 <li><a class="dropdown-item" href="#!">All Products</a></li>
                                 <li><hr class="dropdown-divider" /></li>
                                     <?php
-                                    foreach(getAllCategories() as $cat){
+                                    foreach($dbContext->getAllCategories() as $cat){
                                         echo "<li><a class='dropdown-item' href='#!'>$cat</a></li>";
                                     } 
                                     ?> 
