@@ -6,5 +6,6 @@ class Product{
     public $stockLevel;
     public $categoryName;
 
+    // ANVÄND INTE CONSTRUCTOR MED PARAMETRAR FÖR PDO KAN INTE ANROPA DEN
 };
 ?>

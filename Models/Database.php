@@ -17,8 +17,10 @@ $dotenv->load();
 
 
     class Database{
-        public $pdo;
-        // Norte to Stefan STATIC så inte initieras varje gång
+        public $pdo; // PDO är PHP Data Object - en klass som finns i PHP för att kommunicera med databaser
+        // I $pdo finns nu funktioner (dvs metoder!) som kan användas för att kommunicera med databasen
+        
+        // Note to Stefan STATIC så inte initieras varje gång
 
         function __construct() {    
             $host = $_ENV['HOST'];
@@ -27,7 +29,7 @@ $dotenv->load();
             $pass = $_ENV['PASSWORD'];
             $port = $_ENV['PORT'];
 
-            $dsn = "mysql:host=$host:$port;dbname=$db";
+            $dsn = "mysql:host=$host:$port;dbname=$db"; // connection string
             $this->pdo = new PDO($dsn, $user, $pass);
             $this->initDatabase();
             $this->initData();
@@ -75,7 +77,9 @@ $dotenv->load();
                 'id' => $product->id]);
         }
 
-        function getAllProducts($sortCol="id", $sortOrder="asc"){
+
+        //function getAllProducts($sortCol, $sortOrder){
+        function getAllProducts($sortCol="id", $sortOrder= "asc"){
             if(!in_array($sortCol,["id", "title","price","stockLevel"])){
                 $sortCol = "id";
             }
@@ -83,6 +87,7 @@ $dotenv->load();
                 $sortOrder = "asc";
             }
 
+            // SELECT * FROM Products ORDER BY  id asc
             $query = $this->pdo->query("SELECT * FROM Products ORDER BY $sortCol $sortOrder"); // Products är TABELL 
             return $query->fetchAll(PDO::FETCH_CLASS, 'Product'); // Product är PHP Klass
         }
