@@ -1,15 +1,33 @@
 <?php 
+    require_once("vendor/autoload.php"); // LADDA ALLA DEPENDENCIES FROM VENDOR
+
+// Hur kan man strukturera klasser
+// Hir kan man struktirera filer? Folders + subfolders
+// NAMESPACES       
+
+// LÄS IN ALLA  .env VARIABLER till $_ENV i PHP
+//  :: en STATIC funktion
+$dotenv = Dotenv\Dotenv::createImmutable("."); // . is  current folder for the PAGE
+$dotenv->load();
+// Pilar istf .
+// \ istf .
+
+// import * as dotenv from 'dotenv';
+
+
+
     class Database{
         public $pdo;
         // Norte to Stefan STATIC så inte initieras varje gång
 
         function __construct() {    
-            $host = "localhost";
-            $db   = "shoppen";
-            $user = "root";
-            $pass = "hejsan123";
+            $host = $_ENV['HOST'];
+            $db   = $_ENV['DB'];
+            $user = $_ENV['USER'];
+            $pass = $_ENV['PASSWORD'];
+            $port = $_ENV['PORT'];
 
-            $dsn = "mysql:host=$host;port=3306;dbname=$db";
+            $dsn = "mysql:host=$host:$port;dbname=$db";
             $this->pdo = new PDO($dsn, $user, $pass);
             $this->initDatabase();
             $this->initData();
