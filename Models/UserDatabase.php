@@ -98,8 +98,8 @@ class UserDatabase
 
   function seedUsers()
   {
-    if ($this->pdo->query("select * from users where email='sakarias.naslund@gmail.com'")->rowCount() == 0) {
-      $userId = $this->auth->admin()->createUser("sakarias.naslund@gmail.com", "Hejsan123!", "sakarias.naslund@gmail.com");
+    if ($this->pdo->query("select * from users where email='hej@hejsan.com'")->rowCount() == 0) {
+      $userId = $this->auth->admin()->createUser("hej@hejsan.com", "Hejsan123!", "hej@hejsan.com");
     }
   }
 
