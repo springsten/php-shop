@@ -1,5 +1,6 @@
 <?php
 require_once('Utils/Router.php');
+require __DIR__ . '/vendor/autoload.php';
 require_once("vendor/autoload.php"); // LADDA ALLA DEPENDENCIES FROM VENDOR
 
 // Hur kan man strukturera klasser
@@ -35,6 +36,12 @@ $router->addRoute('/new', function () {
 });
 $router->addRoute('/delete', function () {
   require_once __DIR__ . '/pages/delete.php';
+});
+$router->addRoute('/user/login', function () {
+  require_once(__DIR__ . '/Pages/users/login.php');
+});
+$router->addRoute('/user/logout', function () {
+  require_once(__DIR__ . '/Pages/users/logout.php');
 });
 
 $router->dispatch();

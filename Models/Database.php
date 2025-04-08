@@ -1,10 +1,30 @@
 <?php
+
+require_once('Models/UserDatabase.php');
+
+// Hur kan man strukturera klasser
+// Hir kan man struktirera filer? Folders + subfolders
+// NAMESPACES       
+
+// LÄS IN ALLA  .env VARIABLER till $_ENV i PHP
+
+
+
 class Database
 {
   public $pdo; // PDO är PHP Data Object - en klass som finns i PHP för att kommunicera med databaser
   // I $pdo finns nu funktioner (dvs metoder!) som kan användas för att kommunicera med databasen
 
+  private $usersDatabase;
+  function getUsersDatabase()
+  {
+    return $this->usersDatabase;
+  }
+
+
   // Note to Stefan STATIC så inte initieras varje gång
+
+  // SKILJ PÅ CONFIGURATION OCH KOD
 
   function __construct()
   {
@@ -18,6 +38,9 @@ class Database
     $this->pdo = new PDO($dsn, $user, $pass);
     $this->initDatabase();
     $this->initData();
+    $this->usersDatabase = new UserDatabase($this->pdo);
+    $this->usersDatabase->setupUsers();
+    $this->usersDatabase->seedUsers();
   }
   function initData()
   {
@@ -33,7 +56,6 @@ class Database
       $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName) VALUES ('Cucumber', 15, 30, 'Vegetable')");
       $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName) VALUES ('Tomato', 20, 40, 'Vegetable')");
       $this->pdo->query("INSERT INTO Products (title, price, stockLevel, categoryName) VALUES ('Carrot', 10, 20, 'Vegetable')");
-
     }
   }
 
@@ -72,22 +94,27 @@ class Database
 
   function deleteProduct($id)
   {
-    $query = $this->pdo->prepare("DELETE FROM Products WHERE id = :idParam");
-    $query->execute(["idParam" => $id]);
+    $query = $this->pdo->prepare("DELETE FROM Products WHERE id = :id");
+    $query->execute(['id' => $id]);
   }
 
-  function insertProduct($title, $price, $stockLevel, $categoryName)
+  function insertProduct($title, $stockLevel, $price, $categoryName)
   {
-    $sql = 'INSERT INTO Products (title, price, stockLevel, categoryName) VALUES (:title, :price, :stockLevel, :categoryName)';
+    $sql = "INSERT INTO Products (title, price, stockLevel, categoryName) VALUES (:title, :price, :stockLevel, :categoryName)";
     $query = $this->pdo->prepare($sql);
-    $query->execute(['title' => $title, 'price' => $price, 'stockLevel' => $stockLevel, 'categoryName' => $categoryName]);
+    $query->execute([
+      'title' => $title,
+      'price' => $price,
+      'stockLevel' => $stockLevel,
+      'categoryName' => $categoryName
+    ]);
   }
 
 
   //function getAllProducts($sortCol, $sortOrder){
   function getAllProducts($sortCol = "id", $sortOrder = "asc")
   {
-    if (!in_array($sortCol, ["id", "title", "price", "stockLevel"])) {
+    if (!in_array($sortCol, ["id", "categoryName", "title", "price", "stockLevel"])) {
       $sortCol = "id";
     }
     if (!in_array($sortOrder, ["asc", "desc"])) {
@@ -97,6 +124,17 @@ class Database
     // SELECT * FROM Products ORDER BY  id asc
     $query = $this->pdo->query("SELECT * FROM Products ORDER BY $sortCol $sortOrder"); // Products är TABELL 
     return $query->fetchAll(PDO::FETCH_CLASS, 'Product'); // Product är PHP Klass
+  }
+
+  function getCategoryProducts($catName)
+  {
+    if ($catName == "") {
+      $query = $this->pdo->query("SELECT * FROM Products"); // Products är TABELL 
+      return $query->fetchAll(PDO::FETCH_CLASS, 'Product'); // Product är PHP Klass
+    }
+    $query = $this->pdo->prepare("SELECT * FROM Products WHERE categoryName = :categoryName");
+    $query->execute(['categoryName' => $catName]);
+    return $query->fetchAll(PDO::FETCH_CLASS, 'Product');
   }
   function getAllCategories()
   {
