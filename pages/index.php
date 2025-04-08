@@ -57,8 +57,8 @@ $dbContext = new Database();
             <li class="nav-item"><a class="nav-link" href="/user/logout">Logout</a></li>
           <?php } else { ?>
             <li class="nav-item"><a class="nav-link" href="/user/login">Login</a></li>
-            <li class="nav-item"><a class="nav-link" href="#!">Create account</a></li>
-          <?php
+            <li class="nav-item"><a class="nav-link" href="/user/register">Create account</a></li>
+            <?php
           }
           ?>
         </ul>
